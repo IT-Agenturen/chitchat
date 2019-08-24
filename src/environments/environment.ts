@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyDzO7zutybmiaJ_7TKd7DCb8nqk8c3El2I',
+    authDomain: 'chitchat-77944.firebaseapp.com',
+    databaseURL: 'https://chitchat-77944.firebaseio.com',
+    projectId: 'chitchat-77944',
+    storageBucket: '',
+    messagingSenderId: '804149012565',
+    appId: '1:804149012565:web:9a4fe006fa0f09f1'
+  }
 };
 
 /*

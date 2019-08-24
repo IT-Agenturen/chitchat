@@ -7,6 +7,6 @@ import { AuthService, SocialUser, FacebookLoginProvider } from "angularx-social-
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'chitchat-app';
+  title = 'ChitChat';
 
 }
