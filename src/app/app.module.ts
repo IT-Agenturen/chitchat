@@ -21,6 +21,7 @@ import { ChatService } from './services/chat.service';
 import { AuthService } from './services/auth.service';
 
 import { environment } from '../environments/environment';
+import * as firebase from 'firebase';
 
 
 
