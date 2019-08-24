@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 declare var FB: any;
 
 @Component({
@@ -7,49 +9,25 @@ declare var FB: any;
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+    title="ChitChat-Logga in"
+    public user: any = SocialUser;
 
-  constructor() { }
+
+  constructor(
+    private router: Router,
+    private socialAuthService: AuthService) { }
+
+    facebookLogin(){
+      this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((userData) => {
+        this.user = userData;
+        this.router.navigate["messages"];
+      })
+    }
+
+
 
   ngOnInit() {  
-    (window as any).fbAsyncInit = function() {
-      FB.init({
-        appId      : '2495613174001179',
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v3.1'
-      });
-      FB.AppEvents.logPageView();
-    };
-
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "https://connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
+    
   }
-
-  submitLogin(){
-    console.log("submit login to facebook");
-    // FB.login();
-    FB.login((response)=>
-        {
-          console.log('submitLogin',response);
-          if (response.authResponse)
-          {
-              
-           }
-           else
-           {
-           console.log('User login failed');
-         }
-      });
-
-  }
- 
-
-  
-
 }
 
