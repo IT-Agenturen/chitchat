@@ -51,13 +51,13 @@ export class ChatService {
 
   sendMessage(msg: string) {
     const timeStamp = this.getTimeStamp();
-    const email = "test@example.com" //this.user.email;
+    const email = "test@example.com"; //this.user.email;
     this.chatMessages = this.getMessages();
     
     var message = {
       message: msg,
       timeSent: timeStamp,
-      userName: this.userName,
+      userName: "test-user",//this.userName,
       email: email
     };
     console.log('Called sendmessage');
