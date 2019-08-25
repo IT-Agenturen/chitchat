@@ -9,7 +9,7 @@ export const environment = {
     authDomain: 'chitchat-77944.firebaseapp.com',
     databaseURL: 'https://chitchat-77944.firebaseio.com',
     projectId: 'chitchat-77944',
-    storageBucket: '',
+    storageBucket: 'chitchat-77944.appspot.com',
     messagingSenderId: '804149012565',
     appId: '1:804149012565:web:9a4fe006fa0f09f1'
   }

@@ -1,12 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from "angularx-social-login";
+import {FormsModule} from "@angular/forms";  
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import {FormsModule} from "@angular/forms";  
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -25,18 +23,6 @@ import * as firebase from 'firebase';
 
 
 
-let config = new AuthServiceConfig([
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("2495613174001179")
-  }
-]);
- 
-export function provideConfig() {
-  return config;
-}
- 
-
 
 @NgModule({
   declarations: [
@@ -54,21 +40,19 @@ export function provideConfig() {
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
-    SocialLoginModule,
-    AngularFireModule,
-    AngularFireDatabaseModule,
+    FormsModule,
     AngularFireAuthModule, 
+    AngularFireModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+
   ],
-  providers: [{
-      provide: AuthServiceConfig,
-      useFactory: provideConfig
-  },
+  providers: [
   AuthService,
   ChatService
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

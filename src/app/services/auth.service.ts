@@ -1,24 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
-import { User } from '../models/user.model';
+import { Router } from  "@angular/router";
+import { auth } from  'firebase/app';
+import { AngularFireAuth } from  "@angular/fire/auth";
+import { User } from  'firebase';
 
-@Injectable()
-export class AuthService {
-  private user: Observable<firebase.User>;
-  private authState: any;
+  @Injectable({
+  providedIn: 'root'
+  })
+    export class AuthService {
+      user: User;
+        constructor(public  afAuth:  AngularFireAuth, public  router:  Router) {
+          this.afAuth.authState.subscribe(user => {
+            if (user) {
+              this.user = user;
+              localStorage.setItem('user', JSON.stringify(this.user));
+            } else {
+              localStorage.setItem('user', null);
+            }
+          });
+        }
 
-  constructor(
-    private afAuth: AngularFireAuth, 
-    private db: AngularFireDatabase, 
-    private router: Router) {
-      this.user = afAuth.authState;
-  }
 
-  signUp
+        async  login(email:  string, password:  string) {
+          try {
+              await  this.afAuth.auth.signInWithEmailAndPassword(email, password)
+              this.router.navigate(['admin/list']);
+          } catch (e) {
+              alert("Error!"  +  e.message);
+              }
+          }
 
-  constructor() { }
-}
+          async logout(){
+            await this.afAuth.auth.signOut();
+            localStorage.removeItem('user');
+            this.router.navigate(['admin/login']);
+        }
+
+        get isLoggedIn(): boolean {
+          const  user  =  JSON.parse(localStorage.getItem('user'));
+          return  user  !==  null;
+      }
+    }
+    
