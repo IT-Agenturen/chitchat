@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
 
 import { ChatMessage } from '../models/chat-message.model';
 
@@ -15,29 +13,26 @@ export class ChatService {
   chatMessages: AngularFireList<ChatMessage>;
   chatMessage: ChatMessage;
   userName: Observable<string>;
+  userId: Observable<string>;
+  email: Observable<string>;
+  liked: Observable<boolean>;
   var1$;
   var2$;
 
 
   constructor(
     private db: AngularFireDatabase, 
-    private afAuth: AngularFireAuth
     ) { 
-    this.afAuth.authState.subscribe(auth => {
-      if(auth!== undefined && auth !== null)
-      {
-        this.user = auth;
-      }
-      this.getUser().forEach((u) => {
-        this.userName = u[0];
-        console.log(this.userName);
-    });
-    });
-  }
+    var user = JSON.parse(localStorage.getItem('currentUser'));
+    if(user!== undefined && user !== null){
+     this.userName =  user['name'];
+     this.userId = user['id'];
+     this.email = user['email'];
+  };
+}
 
   getUser() {
-    const userId = 1;//this.user.uid;
-    //console.log(userId);
+    const userId = this.userId;
     const path = `users/${userId}`;
     this.db.list('users/userId')
     const itemsRef: AngularFireList<ChatMessage> = this.db.list(path);
@@ -51,19 +46,20 @@ export class ChatService {
 
   sendMessage(msg: string) {
     const timeStamp = this.getTimeStamp();
-    const email = "test@example.com"; //this.user.email;
+    const email = this.email;
     this.chatMessages = this.getMessages();
     
     var message = {
       message: msg,
       timeSent: timeStamp,
-      userName: "test-user",//this.userName,
+      userName: this.userName,
       email: email
     };
     console.log('Called sendmessage');
     const item = this.db.list('/messages');
     item.push(message);
   }
+  
 
 
   getTimeStamp(){
@@ -80,7 +76,7 @@ export class ChatService {
 
  
   getMessages(): AngularFireList<ChatMessage> {
-    // query to create our message feed binding
+    // create our message feed binding
     const itemsRef: AngularFireList<ChatMessage> = this.db.list('/messages');
     this.var1$ = itemsRef.snapshotChanges();
     this.var2$ = itemsRef.valueChanges();

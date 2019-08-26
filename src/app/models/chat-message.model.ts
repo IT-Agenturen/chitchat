@@ -4,4 +4,5 @@ export class ChatMessage {
     userName?:string;
     message?:any;
     timeSent?: Date = new Date();
+    liked: boolean = false;
 }

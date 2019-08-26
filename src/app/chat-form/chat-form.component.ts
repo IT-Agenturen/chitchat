@@ -28,7 +28,8 @@ export class ChatFormComponent implements OnInit {
   }
 
   constructor(
-    private chat: ChatService) { }
+    private chat: ChatService) { 
+    }
 
   ngOnInit() {
   }
