@@ -1,27 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../services/auth.service";
+import { Router } from '@angular/router';
+import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
+import { FormControl } from '@angular/forms';
+declare var FB: any;
+
 
 @Component({
-selector: 'app-login',
-templateUrl: './login.component.html',
-styleUrls: ['./login.component.scss'],
-providers: [AuthService]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-constructor(private  authService:  AuthService) {}
+    title="ChitChat-Logga in"
+    public user: any = SocialUser;
+    wrong_login = false;
 
-  email: string;
-  password: string;
-  errorMsg: string;
 
-  login() {
-    console.log('login() called from login component');
-    this.authService.login(this.email, this.password)
-      .catch(error => this.errorMsg = error.message);
+
+  constructor(
+    private router: Router,
+    private socialAuthService: AuthService) { }
+
+
+
+
+    public socialSignIn(socialPlatform : string) {
+      if(socialPlatform == "facebook"){
+        this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID)
+        .then((userData) => {
+          this.user = userData;
+          if(userData['response_code'] == 404){
+            this.wrong_login = true;
+          } else{
+            localStorage.setItem('currentUser', JSON.stringify(this.user));
+            this.router.navigate(['chitchat']);
+            console.log(localStorage);
+          }
+        });
+      }
+    }
+  
+
+
+  ngOnInit() {  
+    
   }
-
-  ngOnInit() { }
-
-  }
-
-
+}
