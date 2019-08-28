@@ -1,0 +1,25 @@
+[debug] [2019-08-28T05:15:08.170Z] ----------------------------------------------------------------------
+[debug] [2019-08-28T05:15:08.172Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\larre\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-08-28T05:15:08.172Z] CLI Version:   7.2.4
+[debug] [2019-08-28T05:15:08.172Z] Platform:      win32
+[debug] [2019-08-28T05:15:08.172Z] Node Version:  v10.15.3
+[debug] [2019-08-28T05:15:08.173Z] Time:          Wed Aug 28 2019 07:15:08 GMT+0200 (Central European Summer Time)
+[debug] [2019-08-28T05:15:08.173Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-08-28T05:15:08.180Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-08-28T05:15:08.181Z] > authorizing via signed-in user
+[debug] [2019-08-28T05:15:08.181Z] [iam] checking project chitchat-77944 for permissions ["firebase.projects.get"]
+[debug] [2019-08-28T05:15:08.183Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/chitchat-77944:testIamPermissions  
+
+[debug] [2019-08-28T05:15:09.127Z] <<< HTTP RESPONSE 200
+[debug] [2019-08-28T05:15:09.129Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/chitchat-77944  
+ 
+[debug] [2019-08-28T05:15:09.373Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\larre\Desktop\ChitChat\chitchat-app'...
+[info] 
+[debug] [2019-08-28T05:15:09.380Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/chitchat-77944/webApps/-/config  
+ 
+[debug] [2019-08-28T05:15:09.744Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000

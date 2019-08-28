@@ -11,18 +11,18 @@ import { AngularFireList } from 'angularfire2/database';
 })
 export class FeedComponent implements OnInit, OnChanges {
 
-  feed$: AngularFireList<ChatMessage>;
+  feed: AngularFireList<ChatMessage>;
 
 
   constructor(private chat: ChatService) { }
 
   ngOnInit() {
     console.log('feed initializing...');
-    this.feed$ = this.chat.getMessages();
+    this.feed = this.chat.getMessages();
   }
 
   ngOnChanges(){
-    this.feed$ = this.chat.getMessages();
+    this.feed = this.chat.getMessages();
   }
 
 }

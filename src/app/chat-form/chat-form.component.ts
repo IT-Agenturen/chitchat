@@ -14,7 +14,7 @@ export class ChatFormComponent implements OnInit {
   is_call = false;
   total_page = 0;
   selected_tab = 0;
-  @HostListener("window:scroll", ["$event"])
+  @HostListener("window:scroll")
     onWindowScroll() {
     //In chrome and some browser scroll is given to body tag
     let pos = (document.documentElement.scrollTop || document.body.scrollTop);

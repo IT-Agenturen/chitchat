@@ -42,6 +42,14 @@ export class ChatService {
     return this.var2$;
   }
  
+  getUsers() {
+    const path = `users/`;
+    const itemsRef: AngularFireList<ChatMessage> = this.db.list(path);
+    this.var1$ = itemsRef.snapshotChanges();
+    this.var2$ = itemsRef.valueChanges();
+ 
+    return this.var2$;
+  }
 
 
   sendMessage(msg: string) {
@@ -77,10 +85,17 @@ export class ChatService {
  
   getMessages(): AngularFireList<ChatMessage> {
     // create our message feed binding
+    try{
     const itemsRef: AngularFireList<ChatMessage> = this.db.list('/messages');
     this.var1$ = itemsRef.snapshotChanges();
     this.var2$ = itemsRef.valueChanges();
-    return this.var2$;
+    if(this.var2$!== undefined && this.var2$ !== null ){
+      return this.var2$;
+    }
+  }
+    catch (error){
+      console.error(error);
+    }
   }
 
 }
